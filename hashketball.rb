@@ -1,4 +1,6 @@
 # Write your code below game_hash
+require "pry"
+
 def game_hash
   {
     home: {
@@ -127,3 +129,87 @@ def game_hash
 end
 
 # Write code here
+
+def num_points_scored(player)
+  points_scored = 0
+    game_hash.each do |home_away, team_stats|
+      # team_stats[:players] points to an array 
+        team_stats[:players].each do |players_stats|
+         
+             if players_stats[:player_name] == player
+                points_scored = players_stats[:points]
+             end
+        end
+    end
+  points_scored
+end
+# method end
+def shoe_size(player)
+  shoe_size = 0
+      game_hash.each do |home_away, team_stats|
+        # team_stats[:players] points to an array 
+          team_stats[:players].each do |players_stats|
+              if players_stats[:player_name] == player
+                  shoe_size = players_stats[:shoe]
+              end
+          end
+      end
+  shoe_size
+end
+# method end
+def team_colors(team_name_input)
+   colors = nil
+    game_hash.each do |home_away, team_stats|
+      if team_stats[:team_name] == team_name_input
+        colors  = team_stats[:colors]
+      end
+    end
+  colors
+end
+# method end
+def team_names
+   teams = []
+      game_hash.each { |home_away, team_stats| teams << team_stats[:team_name] }
+   teams
+end
+# method end
+def player_numbers(team)
+    jersey_numbers = []
+      game_hash.each do |home_away, team_stats|
+          if team_stats[:team_name] == team
+           
+              team_stats[:players].each do |player|
+               
+                jersey_numbers << player[:number]
+              end
+          end
+      end
+    jersey_numbers
+end
+# method end
+def player_stats(player_in_question)
+  player_stat = nil
+      game_hash.each do |home_away, team_stats|
+          team_stats[:players].each do |player|
+              if player[:player_name] == player_in_question
+                player_stat = player
+              end
+          end
+      end
+  player_stat
+end
+# method end
+def big_shoe_rebounds 
+  amt_rebounds = 0
+  size = 0
+    game_hash.each do |home_away, team_stats|
+        team_stats[:players].each do |player|
+          if size < player[:shoe]
+            size = player[:shoe]
+            amt_rebounds = player[:rebounds]
+          end
+          # binding.pry
+        end
+    end
+  amt_rebounds
+end
